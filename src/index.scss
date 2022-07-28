@@ -1,0 +1,272 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.video-list{
+  padding:0  20px;
+  min-width: 600px;
+}
+
+.video-item{
+  position: relative;
+  padding: 5px 10px;
+  background-color: rgb(241, 241, 239); 
+  margin: 10px 10px;
+  border-radius: 10px;
+  border: 2px solid rgb(241, 241, 241);
+  
+  &__title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__indexwrap{
+      display: flex;
+      align-items: center;
+      &__index{
+        font-size: 20px;
+        font-weight: 700;
+        color: rgb(0, 0, 0);
+        vertical-align: middle;
+        padding: 2px 5px;
+
+      }
+    }
+    &__wrap{
+      display: flex;
+      flex-direction: column;
+
+      &__name{
+        color:rgb(50, 50, 50);
+        font-size: 19px;
+        font-weight: 600;
+        text-align: center;
+        font-size: calc(8px + 16 * (100vw / 1280));
+        text-shadow: 1px 2px 2px  rgb(201, 200, 200);
+        
+      }
+      &__link{
+        font-size: 8px;
+        color: blue;
+        text-align: center;
+        
+      }
+    }
+
+
+    &__close{    
+      // position: absolute;
+      // right: 5px;
+      // top: 5px;    
+      color:rgb(123, 120, 120);
+      cursor: pointer;
+    }
+    &__close:hover{
+      color: tomato;
+      transform: scale(110%);
+      animation: select 400ms linear;
+    }
+  }
+  
+  
+}
+.shot-item.active{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(34, 237, 196);
+  border-radius: 10px;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0,.3);
+  outline: 4px solid rgba(10, 202, 129, 0.2);
+  margin: 5px; 
+  padding: 7px 0 3px 10px;
+}
+
+.shot-item{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  background-color: azure;
+  border-radius: 10px;
+  box-shadow: 3px 3px 2px rgba(0, 0, 0,.3);
+  margin: 5px 10px; 
+  padding: 7px 2px 3px 10px;
+
+  // &.active{
+    
+  //   box-shadow: -2px -2px 6px rgba(227, 28, 194, 0.6), 2px 2px 6px rgba(2, 207, 16, 0.6) ;
+  //   transform: translateX(10px);
+    
+  // }
+  
+
+  &__timewrap{
+    display: flex; 
+    align-items: center;
+    width: 350px;
+     
+    &__time{
+      display: block;
+      width: 180px;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-weight: 600;
+      color:rgb(128, 128, 128);
+    }
+    &__time:hover{
+      background-color: azure;
+      cursor: pointer;
+      // outline: 1px solid black;
+      box-shadow: 0px 0px 2px black;
+      border-radius: 4px;
+      
+  
+    }
+    &__input{
+      display: flex;
+      align-items: center;
+      cursor: pointer; 
+      
+    }
+    &__input::-webkit-calendar-picker-indicator {
+      background-color: greenyellow;
+      // cursor: pointer;
+    }
+    
+    &__time-clear{
+      color:rgb(176, 176, 176);
+      font-size: 15px;
+      margin-left: 3px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    &__alarm-input{
+      cursor: pointer;      
+    }
+    
+  }  
+  
+  &__spin_wrap{
+    width: 110px;
+    display: flex;
+    align-items: center;
+    &__direction{
+      color:rgb(0, 0, 0);
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-weight: 700;
+    }
+  }
+  &__spin_wrap>i{
+    padding: 0 10px;    
+  }
+  &__spin_wrap>i:hover{
+    cursor: pointer;   
+  }
+  &__spin{
+    color:tomato;
+    font-weight: 600;
+    transform: scale(120%);
+    animation: select 400ms linear 1;
+  }
+ 
+
+  &__date{
+    font-size: 8px;
+    font-weight: 600;
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    background-color: rgba(242, 242, 242, 0.4);
+    border-radius: 5px;
+    padding: 0 10px;    
+  }
+  &__date:hover{
+    transform: scale(150%) translateX(-25%);
+    background-color: white;
+    border: 1px solid black;
+    z-index: 10;
+  }
+  &__delshot{
+    display: flex;
+    align-items: center;
+    cursor: pointer;    
+    color: rgb(177, 177, 177);
+    transform: translateY(-7px);
+  }
+  &__delshot:hover{
+    color: tomato;
+    font-weight: 600;
+    transform: scale(110%) translateY(-7px);
+    
+  }
+}
+.shot-item:hover{
+
+}
+
+.black-screen{
+  position: fixed;
+  inset: 0 0 0 0;
+  background-color: rgba(0, 0, 0,.6);  
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__ball{
+    display: block;
+    left: 50%;
+    top:50%;
+    width: 300px;
+    height: 300px;
+    cursor: crosshair;
+  }
+}
+
+@keyframes select{
+  0%{
+    transform: (rotate(0));
+  }
+  25%{
+    transform: (rotate(-10deg));
+  }
+  50%{
+    transform: (rotate(0));
+  }
+  75%{
+    transform: (rotate(10deg));
+  }
+  100%{
+    transform: (rotate(0));
+  }
+}
+
+
+// SHOT ANIMATION
+
+.shotItem-enter {
+  opacity: 0;
+  transform: translateX(-1000px);
+}
+.shotItem-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 300ms ease-in;
+}
+.shotItem-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.shotItem-exit-active {
+  opacity: 0;
+  transform: translateX(1000px);
+  transition: all 300ms ease-in;
+}
