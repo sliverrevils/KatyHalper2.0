@@ -30,7 +30,7 @@ export const ItemsList:React.FC=()=>{
         event.preventDefault();        
         const link= await fromClipboard();
         if(/^https:..www.youtube.com./.test(link))
-        dispatch(addVideo({link,name:prompt('Имя видео')}));
+        dispatch(addVideo({link,name:link.split('=')[1]}));
         else
         alert(`В буфере нет ссылки на видею Yputube`);
     };    

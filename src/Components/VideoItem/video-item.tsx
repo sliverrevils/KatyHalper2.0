@@ -77,7 +77,7 @@ export const VideoItem: React.FC<IVideoProps> = ({ id, link, index, addShotItem,
         event.target.parentElement.parentElement.style.backgroundColor='black';
         event.target.parentElement.children[0].children[1].style.color='red';
         event.target.parentElement.children[1].children[0].style.color='white';
-         event.target.parentElement.children[1].children[0].style.textDecoration='line-through'
+        // event.target.parentElement.children[1].children[0].style.textDecoration='line-through'
     },[]);
 
     const notDel=useCallback((event:any)=>{
@@ -85,7 +85,7 @@ export const VideoItem: React.FC<IVideoProps> = ({ id, link, index, addShotItem,
         event.target.parentElement.children[0].children[1].style.color='black';
         event.target.parentElement.children[1].children[0].style.color='black';
 
-        event.target.parentElement.children[1].children[0].style.textDecoration='none'
+       // event.target.parentElement.children[1].children[0].style.textDecoration='none'
     },[]);
     
 
@@ -99,7 +99,7 @@ export const VideoItem: React.FC<IVideoProps> = ({ id, link, index, addShotItem,
                  
                 <div className='video-item__title__wrap' >
                 <a className='video-item__title__wrap__name' href={link} target='blank'>{videoNameFixer(name)}</a>
-                <a className='video-item__title__wrap__link' href={link} target='blank'>{link}</a>
+                {/* <a className='video-item__title__wrap__link' href={link} target='blank'>{link}</a> */}
                 </div>
                 
                 
