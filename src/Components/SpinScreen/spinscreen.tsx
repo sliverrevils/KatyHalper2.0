@@ -29,17 +29,17 @@ export const SpinScreen:React.FC<IScreenProps> =({winClose,shooseSpin,videoLink,
     }
 
     const ballSpin=(x:number,y:number)=>{        
-        if(x==0&&y==0)return 'top-left';
-        if(x==1&&y==0)return 'top';
-        if(x==2&&y==0)return 'top-right';
+        if(x==0&&y==0)return 'TL';
+        if(x==1&&y==0)return 'TOP';
+        if(x==2&&y==0)return 'TR';
 
-        if(x==0&&y==1)return 'left';
-        if(x==1&&y==1)return 'center';
-        if(x==2&&y==1)return 'right';
+        if(x==0&&y==1)return 'L';
+        if(x==1&&y==1)return 'CENTER';
+        if(x==2&&y==1)return 'R';
 
-        if(x==0&&y==2)return 'back-left';
-        if(x==1&&y==2)return 'back';
-        if(x==2&&y==2)return 'back-right';
+        if(x==0&&y==2)return 'DL';
+        if(x==1&&y==2)return 'DRAW';
+        if(x==2&&y==2)return 'DR';
 
     }
    
