@@ -43,7 +43,7 @@ export const VideoItem: React.FC<IVideoProps> = ({ id, link, index, addShotItem,
         {
             shots.map((el: any) => (
             <CSSTransition key={el.id} timeout={500} classNames='shotItem'>
-                <div>
+                
                 <ShotItem
                     id={el.id}
                     videoId={el.videoId}
@@ -55,11 +55,12 @@ export const VideoItem: React.FC<IVideoProps> = ({ id, link, index, addShotItem,
                     spin={el.spin}
                     date={el.date}
                     color={el.color} 
-                    delShot={() => onDelShot(el)} 
-                   
+                    delShot={() => onDelShot(el)}
+                    parent={el.parent} 
+                    {...{addShotItem}}                   
                     />
                     {/* <Test key={nanoid()} {...{...el,onDelShot}}/> */}
-                    </div>
+                    
             </CSSTransition>
             ))                   
         }

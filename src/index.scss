@@ -75,10 +75,10 @@ code {
       transform: scale(110%);
       animation: select 400ms linear;
     }
-  }
-  
-  
+  }  
 }
+
+
 .shot-item.active{
   position: relative;
   display: flex;
@@ -91,14 +91,17 @@ code {
   padding: 7px 0 3px 10px;
 }
 
+
 .shot-item{
+  
   position: relative;
   display: flex;
   justify-content: space-between;
   background-color: azure;
   border-radius: 10px;
   box-shadow: 3px 3px 2px rgba(0, 0, 0,.3);
-  margin: 5px 10px; 
+
+  margin: 5px 10px 0 10px; 
   padding: 7px 2px 3px 10px;
 
   // &.active{
@@ -210,8 +213,20 @@ code {
   }
 }
 .shot-item:hover{
-
+background-color: whitesmoke;
 }
+.shot-item.child{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  
+  border-radius:0px 0px 10px 10px;
+  // box-shadow: 0px 0px 1px rgba(0, 0, 0,.3);
+ 
+  margin-top: 0px; 
+  padding: 7px 0 3px 10px;
+}
+
 
 .black-screen{
   position: fixed;

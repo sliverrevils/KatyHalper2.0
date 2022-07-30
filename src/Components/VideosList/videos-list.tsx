@@ -35,13 +35,15 @@ export const ItemsList:React.FC=()=>{
         alert(`В буфере нет ссылки на видею Yputube`);
     };    
 
-    const addShotItem=async(id:string)=>{
+    const addShotItem=async(id:string,parent:string='')=>{
         const timeShot=await fromClipboard();
         if(/^[0-9]{2} час : [0-9]{2} мин : [0-9]{2} сек$/.test(timeShot))
-        dispatch(addShot({videoId:id,timeShot}));
+        dispatch(addShot({videoId:id,timeShot,parent}));
         else
         alert('Ошибка удара');
     }
+
+    
 
     useEffect(()=>{
         window.addEventListener('contextmenu',addItemVideo);

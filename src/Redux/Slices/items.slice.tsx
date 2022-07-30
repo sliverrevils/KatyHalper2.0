@@ -19,7 +19,8 @@ interface IPayloadShot {
     spin?: ISpin
     alarm?:string
     alarmStatus?:string
-    test?:boolean
+    parent?:string
+    
 }
 
 interface IShot {
@@ -66,10 +67,16 @@ const itemSlice = createSlice({
             reducer: (state, action: IShot) => {                
                 const videoIndex=state.videos.findIndex((el:any)=>el.id=== action.payload.videoId);
                 if (state.videos[videoIndex].shots.findIndex((el: any) => el.timeShot === action.payload.timeShot) < 0)
-                    state.videos[videoIndex].shots.push({ ...action.payload, date: new Date().toLocaleString(), spin: '',color:'black',alarmStatus:null,alarm:'' ,test:false});
+                    if(!action.payload.parent)//ADD PARENT
+                    state.videos[videoIndex].shots.push({ ...action.payload, date: new Date().toLocaleString(), spin: '',color:'black',alarmStatus:null,alarm:''});
+                    else                      //ADD CHILDREN
+                    {                        
+                        const shotIndex=state.videos[videoIndex].shots.findIndex((el: any) => el.id === action.payload.parent);
+                        console.log('PARENT SHOT',videoIndex,shotIndex);
+                        state.videos[videoIndex].shots.splice(shotIndex+1,0,{ ...action.payload, date: new Date().toLocaleString(), spin: '',color:'black',alarmStatus:null,alarm:''})
+                    }
                 else
                     alert('Такой удар уже есть ‼️');
-
             }
         },
         delShot: (state, action: IShot) => {
@@ -77,7 +84,7 @@ const itemSlice = createSlice({
             // eslint-disable-next-line no-restricted-globals
             if (confirm(`Удалить удар? : ${action.payload.timeShot}`))
                 state.videos[videoIndex].shots = state.videos[videoIndex].shots.filter((el: any) => el.id !== action.payload.id);
-        },
+        },        
         changeSpin: (state, action) => {            
             const videoIndex=state.videos.findIndex((el:any)=>el.id=== action.payload.videoId);
             state.videos[videoIndex].shots[state.videos[videoIndex].shots.findIndex((el: any) => el.id === action.payload.id)].spin = action.payload.spin
@@ -98,7 +105,6 @@ const itemSlice = createSlice({
             const videoIndex=state.videos.findIndex((el:any)=>el.id=== action.payload.videoId);
             const shotIndex=state.videos[videoIndex].shots.findIndex((el: any) => el.id === action.payload.id);
             console.log('REDUX ACTION')
-
         }
 
     }

@@ -19,8 +19,9 @@ interface IShotProps {
     alarm: string
     color: string
     alarmStatus?: string
-    test?:boolean
+    parent:string
     delShot(): void
+    addShotItem(id:string,parent:string):void //id = videoId 
     
 }
 
@@ -34,7 +35,7 @@ export function calcTimeCode(videoLink: string, textCode: string) {
 }
 
 
-export const ShotItem: React.FC<IShotProps> = ({ videoId, id, time, delShot, videoLink, alarm, alarmStatus, spin, date, color,test }) => {
+export const ShotItem: React.FC<IShotProps> = ({ videoId, id, time, delShot, videoLink, alarm, alarmStatus, spin, date, color,addShotItem ,parent}) => {
     const [spinFiled, setSpinFiled] = useState(false);
     const [alarmIco, setAlarmIco] = useState();
     const [alarmState, setAlarmState] = useState('');    
@@ -109,7 +110,7 @@ export const ShotItem: React.FC<IShotProps> = ({ videoId, id, time, delShot, vid
 
     //-SET
     const calcTimeToAlarm = () => {
-        console.log(Math.floor((new Date(alarm + '').getTime() - Date.now()) / 1000));
+       // console.log(Math.floor((new Date(alarm + '').getTime() - Date.now()) / 1000));
         return Math.floor((new Date(alarm + '').getTime() - Date.now()) / 1000);
     }
 
@@ -208,14 +209,7 @@ export const ShotItem: React.FC<IShotProps> = ({ videoId, id, time, delShot, vid
     }  
 
    
-    //------------------COMPONENT MOUNT\UNMOUNT
-    useEffect(() => {
-        console.log('RENDER-SHOT : ', id);
-        return ()=>{
-            console.log('DEL SHOT');
-            soundRef.current.pause();
-        };
-    }, [])
+    
 
     // DEL ANIM FUNCS
     const wontDel=useCallback((event:any)=>{
@@ -227,15 +221,40 @@ export const ShotItem: React.FC<IShotProps> = ({ videoId, id, time, delShot, vid
         event.target.parentElement.children[0].children[0].style.textDecoration='none'
     },[]);
 
+    //----------------ADD CHILDREN SHOT
+    const onAddChildrenShot=(event:any)=>{
+      event.preventDefault();
+      event.stopPropagation();
+      addShotItem(videoId,id);//
+    }
+
+    //------------------COMPONENT MOUNT\UNMOUNT
+    const shotRef:any=useRef()
+    useEffect(() => {
+        //console.log('RENDER-SHOT : ', id);
+        if(parent&&shotRef.current.previousSibling?.id==parent){
+            console.log('TRUE',shotRef.current.previousSibling);
+            shotRef.current.previousSibling.style.borderRadius='10px 10px 0 0';
+            shotRef.current.previousSibling.classList.contains('child')?shotRef.current.previousSibling.style.borderRadius='0 0 0 0':shotRef.current.previousSibling.style.borderRadius='10px 10px 0 0';
+            
+        }
+        return ()=>{
+            console.log('DEL SHOT');
+            soundRef.current.pause();
+           
+        };
+    }, [])
+
     return (
-        <div className='shot-item' tabIndex={0}  {...{ onClick, onContextMenu }}  >
+        <div className={`shot-item ${parent?'child':''}`} tabIndex={0}  {...{ onClick, onContextMenu }} ref={shotRef} id={id} >
 
           
 
             {spinFiled && <SpinScreen winClose={() => setSpinFiled(false)} {...{ shooseSpin, videoLink, time, onSetColor, color, onContextMenu, colorState }} />}
 
             <div className="shot-item__timewrap">
-                <a className="shot-item__timewrap__time" href={calcTimeCode(videoLink, time)} target='blank'>{time}</a>
+                
+                <a className="shot-item__timewrap__time" href={calcTimeCode(videoLink, time)} target='blank' onContextMenu={onAddChildrenShot}>{time}</a>
                 <label htmlFor="alarm" className="shot-item__timewrap__input">
                     <input id='alarm' type={'datetime-local'} onChange={onSetAlarm} value={alarmState} className="shot-item__timewrap__alarm-input" style={{ width: 20, padding: 0, margin: 0, height: 20, cursor: 'pointer' }} />
                     {alarm && alarm.replace('T', '  ')}
