@@ -232,15 +232,25 @@ export const ShotItem: React.FC<IShotProps> = ({ videoId, id, time, delShot, vid
     const shotRef:any=useRef()
     useEffect(() => {
         //console.log('RENDER-SHOT : ', id);
-        if(parent&&shotRef.current.previousSibling?.id==parent){
-            console.log('TRUE',shotRef.current.previousSibling);
+        const prevEl=shotRef.current.previousSibling;
+        const nextEl=shotRef.current.nextElementSibling;
+        if(parent&&shotRef.current.previousSibling?.id==parent){ //если предидущий удар наш родитель
+           // console.log('TRUE',shotRef.current.previousSibling);
             shotRef.current.previousSibling.style.borderRadius='10px 10px 0 0';
-            shotRef.current.previousSibling.classList.contains('child')?shotRef.current.previousSibling.style.borderRadius='0 0 0 0':shotRef.current.previousSibling.style.borderRadius='10px 10px 0 0';
-            
+
+            shotRef.current.previousSibling.classList.contains('child')
+            ?shotRef.current.previousSibling.style.borderRadius='0 0 0 0'
+            :shotRef.current.previousSibling.style.borderRadius='10px 10px 0 0';            
         }
         return ()=>{
             console.log('DEL SHOT');
             soundRef.current.pause();
+            if(parent&&prevEl.id==parent){// округляем родителя после удаления
+                
+                console.log('PREV',prevEl);
+               // prevEl.style.borderRadius='10px';
+                prevEl.style.borderRadius=prevEl.classList.contains('child')?'0 0 10px 10px':'10px';
+            }
            
         };
     }, [])

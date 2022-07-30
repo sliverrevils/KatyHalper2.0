@@ -10,7 +10,7 @@ export const MainPage:React.FC=()=>{
     return (
     <div className="main-page">
         
-        {/* <input type="text" defaultValue={'00 час : 06 мин : 48 сек'} /> */}
+        <input type="text" defaultValue={'00 час : 06 мин : 48 сек'} />
             <NavBar/>
             <ItemsList/>
             
