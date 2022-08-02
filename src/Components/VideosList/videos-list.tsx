@@ -24,7 +24,7 @@ export const ItemsList:React.FC=()=>{
     const videosArr=useSelector((state:IVideosArr)=>state.items.videos);
 
 
-    const fromClipboard=async()=>await navigator.clipboard.readText().then(link=>link)
+    const fromClipboard=async()=>await navigator.clipboard.readText().then(link=>link.trim())
 
     const addItemVideo=async(event:MouseEvent)=>{
         event.preventDefault();        
@@ -36,7 +36,7 @@ export const ItemsList:React.FC=()=>{
     };    
 
     const addShotItem=async(id:string,parent:string='')=>{
-        const timeShot=await fromClipboard();
+        const timeShot=await fromClipboard();        
         if(/^[0-9]{2} час : [0-9]{2} мин : [0-9]{2} сек$/.test(timeShot))
         dispatch(addShot({videoId:id,timeShot,parent}));
         else
