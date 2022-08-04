@@ -75,7 +75,7 @@ export const VideoItem: React.FC<IVideoProps> = ({ id, link, index, addShotItem,
     }
     //DEL ANIM FUNCS
     const wontDel=useCallback((event:any)=>{
-        event.target.parentElement.parentElement.style.backgroundColor='black';
+        event.target.parentElement.parentElement.style.backgroundColor='gray';
         event.target.parentElement.children[0].children[1].style.color='red';
         event.target.parentElement.children[1].children[0].style.color='white';
         // event.target.parentElement.children[1].children[0].style.textDecoration='line-through'
