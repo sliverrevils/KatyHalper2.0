@@ -28,7 +28,7 @@ export const VideoItem: React.FC<IVideoProps> = ({ id, link, index, addShotItem,
     const onAddShot = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log('ADD ID',id);
+        //console.log('ADD ID',id);
         addShotItem(id);
     }
 

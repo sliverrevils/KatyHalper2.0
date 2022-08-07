@@ -14,18 +14,20 @@ interface IScreenProps{
 
 export const SpinScreen:React.FC<IScreenProps> =({winClose,shooseSpin,videoLink,time,onSetColor,color,onContextMenu,colorState})=>{
     
-
+    
     const onBallClick=(event:any)=>{
+        
         event.stopPropagation();
         event.preventDefault();
         const posLeft=event.pageX-event.target.offsetLeft
-        const posTop=event.pageY-event.target.offsetTop;
+        const posTop=(event.pageY-window.pageYOffset)-document.querySelector('.black-screen__ball')!.getBoundingClientRect().top;
+        //const posTop=event.pageY-event.target.offsetTop;
         const ballWidth=event.target.clientWidth;
         const ballHeight=event.target.clientHeight;        
         const x=Math.floor(posLeft/(ballWidth/3)),
         y=Math.floor(posTop/(ballHeight/3));       
         shooseSpin(ballSpin(x,y));
-        onSetColor(colorState);
+        onSetColor(colorState);       
     }
 
     const ballSpin=(x:number,y:number)=>{        
@@ -46,7 +48,10 @@ export const SpinScreen:React.FC<IScreenProps> =({winClose,shooseSpin,videoLink,
     const frameRef=useRef<any>(null);
     useEffect(()=>{
         calcTimeCode(videoLink,time);
-                frameRef.current.focus();
+        frameRef.current.focus();
+       //document.body.style.overflow='hidden';
+       document.body.style.overflow='hidden';
+       return ()=>{document.body.style.overflow='scroll';}
     },[]);
 
     

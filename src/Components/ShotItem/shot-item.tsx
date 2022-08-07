@@ -29,7 +29,7 @@ export function calcTimeCode(videoLink: string, textCode: string) {
     let arr = textCode.split(' ');
     let secs = (+arr[0] * 60 * 60) + (+arr[3] * 60) + (+arr[6]);
     let videoName = videoLink.split('=');
-    console.log('VIDEO NAME',videoName);
+    //console.log('VIDEO NAME',videoName);
 
     const timeLink = `https://www.youtube.com/embed/${videoName[1]?.replace('&t','')}?autoplay=1&mute=1&iv_load_policy=3&rel=0&autohide=1&start=${secs}`;
     return timeLink;
