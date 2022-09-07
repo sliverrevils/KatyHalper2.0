@@ -56,7 +56,7 @@ export const ItemsList:React.FC=()=>{
         localStorage.setItem('videos',JSON.stringify(videosArr));
     },[videosArr]);
     
-    const videoList=useMemo(()=>videosArr?.map((el:IVideoItem,index:number)=><VideoItem name={el.name} key={el.id} id={el.id} link={el.link} {...{  index, addShotItem }}/>) ,[videosArr])
+    const videoList=useMemo(()=>videosArr?.map((el:IVideoItem,index:number)=><VideoItem name={el.name} key={el.id} id={el.id} link={el.link} {...{  index, addShotItem }}/>).reverse() ,[videosArr])
     return(
        
            
